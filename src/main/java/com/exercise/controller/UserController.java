@@ -1,6 +1,7 @@
 package com.exercise.controller;
 
 import com.exercise.model.User;
+import com.exercise.model.Phone;
 import com.exercise.model.Message;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,8 @@ public class UserController {
     private final List<User> users = new ArrayList<>();
 
     public UserController() {
-        users.add(new User("Enrique", "enrique@dominio.com","Enrique123"));
-        users.add(new User("Thaily", "thaily@dominio.com","Thaily789"));
+        users.add(new User("Enrique", "enrique@dominio.com", "Enrique123",new ArrayList<>(Array.isList(new Phone("27786211","11","054"),new Phone("3648727","212","058")))));
+        users.add(new User("Thaily", "ninaly8@dominio.com", "Thaily123",new ArrayList<>(Array.isList(new Phone("3213508","212","058")))));
     }
 
     @GetMapping
@@ -33,14 +34,30 @@ public class UserController {
     @PostMapping
     @ResponseBody
     public Message addUser(@RequestBody User _user) {
-        //user u = new (_user.GetTitle(), _user.getEmail(), _user.getPassword());
+        Message msg;
+        if (!_user.isPassValid()) {
+        
+            msg = new Message("La contraseña debe contener: 'Una letra Mayuscula, letras minúsculas, y dos numero'");
+            return msg;
+        }
+
+        if (!_user.isEmailValid()) {
+            msg = new Message("El correo tiene que cumplir con el formato: 'aaaaaaa@dominio.cl'");
+            return msg;   
+        }
+
         users.add(_user);
-        Message msg = new Message("Usuario agregado con Exito!");
+        msg  = new Message("El usuario: " + _user.getTitle() + " ha sido agregado");
         return msg;
+
     }
 
     @DeleteMapping("/{_index}")
-    public void deleteUser(@PathVariable int _index) {
+    public Message deleteUser(@PathVariable int _index) {
+        Message msg;
+        User user = users.get(_index);
+        msg = new Message("El usuario: " + user.getTitle() + " Have been remove");
         users.remove(_index);
+        return msg;
     }
 }

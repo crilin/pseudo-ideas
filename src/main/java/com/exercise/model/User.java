@@ -1,12 +1,17 @@
 package com.exercise.model;
 
+import com.exercise.model.Phone;
 import java.time.*;
 import java.time.format.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class User {
     private String title;
     private String email;
     private String password;
+    private List<Phone> ownPhones = new ArrayList<>();
     private String created;
     private String modified;
     private String last_login;
@@ -15,10 +20,17 @@ public class User {
 
     public User() { }
 
-    public User(String _title, String _email, String _password) {
+    /**
+    * @param _title
+    * @param _email
+    * @param _password
+    * @param _ownPhone
+    */
+    public User(String _title, String _email, String _password, List<Phone> _ownPhone) {
         this.title = _title;
         this.email = _email;
         this.password = _password;
+        this.ownPhones = _ownPhone;
         this.created = LocalDate.now().toString();
         this.modified = LocalDate.now().toString();
         this.last_login = LocalDate.now().toString();
@@ -35,6 +47,7 @@ public User(String _title, String _email, String _password, String _created, Str
         this.isactive = _isactive;
     }
 
+    // GETTER AND SETTER
     public String getTitle() {
         return title;
     }
@@ -45,6 +58,10 @@ public User(String _title, String _email, String _password, String _created, Str
 
     public String getPassword() {
         return password;
+    }
+
+    public List<Phone> getPhone() {
+        return ownPhones;
     }
 
     public String getCreated() {
@@ -63,7 +80,7 @@ public User(String _title, String _email, String _password, String _created, Str
         return isactive;
     }
 
-/*    public void setCreated(String _created) {
+    /*    public void setCreated(String _created) {
         System.out.println("Fecha recibida: " + _created);
         created = LocalDate.parse(_created);
     }
@@ -77,4 +94,32 @@ public User(String _title, String _email, String _password, String _created, Str
         System.out.println("Fecha recibida: " + _last_login);
         this.last_login = LocalDate.parse(_last_login);
     }*/
+
+    // PUBLIC METHODS
+    /**
+    * 
+    * @return
+    * @throws IOException 
+    * @throws JsonParseException 
+    * @throws JsonProcessingException
+    */
+    public boolean isPassValid() {
+        String pattern = "^([A-Z]{1})([a-z]+)([0-9]{2})$";
+
+        return password.matches(pattern);
+    }
+
+    /**
+    * 
+    * @return
+    * @throws IOException 
+    * @throws JsonParseException 
+    * @throws JsonProcessingException
+    */
+    public boolean isEmailValid() {
+        String pattern = "^[a-z]+@[a-z]+\\.[a-z]{2,5}$";
+
+        return email.matches(pattern);
+    }
+
 }
