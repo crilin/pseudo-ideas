@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class UserController {
     private final List<User> users = new ArrayList<>();
 
     public UserController() {
-        users.add(new User("Enrique", "enrique@dominio.com", "Enrique123",new ArrayList<>(Array.isList(new Phone("27786211","11","054"),new Phone("3648727","212","058")))));
-        users.add(new User("Thaily", "ninaly8@dominio.com", "Thaily123",new ArrayList<>(Array.isList(new Phone("3213508","212","058")))));
+        users.add(new User("Enrique", "enrique@dominio.com", "Enrique123",new ArrayList<>(Arrays.asList(new Phone("27786211","11","054"),new Phone("3648727","212","058")))));
+        users.add(new User("Thaily", "ninaly8@dominio.com", "Thaily123",new ArrayList<>(Arrays.asList(new Phone("3213508","212","058")))));
     }
 
     @GetMapping
