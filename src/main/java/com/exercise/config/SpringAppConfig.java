@@ -1,7 +1,10 @@
-package com.exercise;
+package com.exercise.config;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,11 +19,18 @@ import javax.servlet.ServletRegistration;
 @ComponentScan(basePackages = {"com.exercise"})
 public class SpringAppConfig implements WebApplicationInitializer {
 
+    @Bean
+    public MessageSource messageSource() {
+      ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+      source.setBasename("messages");
+      return source;
+    }
+
     @Override
     public void onStartup(ServletContext container) {
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(SpringAppConfig.class);
+        rootContext.register(SpringAppConfig.class, HibernateConfig.class);
 
         // Manage the lifecycle of the root application context
         container.addListener(new ContextLoaderListener(rootContext));
@@ -34,4 +44,9 @@ public class SpringAppConfig implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }
+
+   /*@Override
+   protected Class<?>[] getRootConfigClasses() {
+      return new Class[] { HibernateConfig.class };
+   }*/
 }

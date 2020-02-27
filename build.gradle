@@ -9,6 +9,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
 mainClassName = 'com.exercise.Main'
 
 // 2 - define the dependency to the shadow plugin
@@ -27,16 +28,32 @@ shadowJar {
 }
 
 repositories {
+    //mavencentral()
     jcenter()
 }
 
 dependencies {
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.0.47'
+    
     compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '5.0.1.RELEASE'
+    
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.2'
-    //compile group: 'org.hibernate:hibernate-entitymanager:4.1.3.Final'
-    compile group: 'org.hsqldb', name: 'hsqldb', version:'2.5.0'
+    
     compile group: 'org.hibernate', name:'hibernate-core', version: '5.4.11.Final'
+    compile group: 'org.hibernate', name:'hibernate-c3p0', version: '5.4.11.Final'
+    compile group: 'org.hibernate', name:'hibernate-validator', version: '5.4.1.Final'
+    //compile group: 'org.hibernate:hibernate-entitymanager:4.1.3.Final'
+    
+
+    compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
+
+    compile group: 'javax.servlet.jsp.jstl', name: 'javax.servlet.jsp.jstl-api', version: '1.2.1'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.1'
+    compile group: 'org.hsqldb', name: 'hsqldb', version:'2.5.0'
+    
+
 
 }
 

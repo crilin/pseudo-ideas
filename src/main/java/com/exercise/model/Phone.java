@@ -1,10 +1,28 @@
 package com.exercise.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PHONES")
 public class Phone {
 
-	private String number;
-	private String citycode;
-	private String countrycode;
+	@Id
+    @GeneratedValue
+    @Column(name = "ID")
+    private Long id;
+	
+	@Column(name = "NUMBER")
+    private String number;
+	
+	@Column(name = "CITYCODE")
+    private String citycode;
+	
+	@Column(name = "COUNTRYCODE")
+    private String countrycode;
 
 	public Phone() { }
 
@@ -25,4 +43,6 @@ public class Phone {
 	public String getcountrycode() {
 		return countrycode;
 	}
+
+	
 }
