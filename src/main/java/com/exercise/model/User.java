@@ -56,7 +56,7 @@ public class User {
     * @param _email
     * @param _password
     * @param _ownPhone
-
+    */
     //public User(String _title, String _email, String _password, List<Phone> _ownPhone) {
     public User(String _title, String _email, String _password) {
         this.title = _title;
@@ -77,9 +77,17 @@ public User(String _title, String _email, String _password, String _created, Str
         this.modified = _modified;
         this.last_login = _last_login;
         this.isactive = _isactive;
-    }*/
+    }
 
     // GETTER AND SETTER
+    public Long getId() {
+        return id;
+    }
+
+    public void SetId(Long _id) {
+        this.id = _id;
+    }
+
     public String getTitle() {
         return title;
     }
